@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "669067657695",
+    "project_id": "dhismoappadmin",
+    "storage_bucket": "dhismoappadmin.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:669067657695:android:4b8119f736366bbcd4c46a",
+        "android_client_info": {
+          "package_name": "dhismoapp.admin.dhismoappadmin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "669067657695-9gc6tma9msu37i95loe8vstv4oli1u9q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "dhismoapp.admin.dhismoappadmin",
+            "certificate_hash": "a516f2312be481ca3b51e921824d866afafa2409"
+          }
+        },
+        {
+          "client_id": "669067657695-8au09j5o8uuffubbma1j2ah8v8qvfoi8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwFRNabKxIaw6zO4LlmHYcLDxlpJSasXc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "669067657695-8au09j5o8uuffubbma1j2ah8v8qvfoi8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
