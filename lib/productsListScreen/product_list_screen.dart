@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'dart:ui';
 
+import 'package:dhismoappadmin/add_new_project/add_new_project_state.dart';
 import 'package:dhismoappadmin/models/product_model.dart';
 import 'package:dhismoappadmin/models/total_products_price_model.dart';
 import 'package:dhismoappadmin/service/service.dart';
@@ -29,8 +30,11 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
   @override
   void initState() {
     super.initState();
-    productStream = context.read(productListProvider).getProductStream;
-    totalSoldStreamData = context.read(productListProvider).totalSoldStream;
+    String? projectID = context.read(addNewProjectProvider).currentProjectName;
+    productStream =
+        context.read(productListProvider).getProductStream(projectID!);
+    totalSoldStreamData =
+        context.read(productListProvider).totalSoldStream(projectID);
 
     Random rnd = Random();
     String getRandomString(int length) =>
@@ -164,7 +168,10 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
                               );
                             });
                       },
-                      child: Icon(Icons.dangerous,color: Colors.deepPurple[600],)),
+                      child: Icon(
+                        Icons.dangerous,
+                        color: Colors.deepPurple[600],
+                      )),
                   title: Text("Home"),
                   centerTitle: true,
                   actions: [

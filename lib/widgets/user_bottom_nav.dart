@@ -1,6 +1,5 @@
 
 import 'package:dhismoappadmin/history/history_screen.dart';
-import 'package:dhismoappadmin/jumlo_history/jumlo_history.dart';
 import 'package:flutter/material.dart';
 
 class DisplayUserData extends StatefulWidget {
@@ -15,7 +14,7 @@ class DisplayUserData extends StatefulWidget {
 
 class homeState extends State<DisplayUserData> {
   int _selectedIndex = 0;
-  List<Widget> _widgetOptions = <Widget>[HistoryScreen(), JumloHistory()];
+  List<Widget> _widgetOptions = <Widget>[HistoryScreen(), HistoryScreen()];
 
   void _onItemTapped(int index) {
     setState(() {

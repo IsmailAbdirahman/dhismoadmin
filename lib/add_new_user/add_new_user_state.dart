@@ -25,8 +25,8 @@ class AddNewUserState extends ChangeNotifier {
     notifyListeners();
   }
 
-  addNewUser(String phoneNumber, bool isBlocked) async {
-    return await _service.addNewUser(phoneNumber, isBlocked);
+  addNewUser(String phoneNumber, bool isBlocked, String projectID) async {
+    return await _service.addNewUser(phoneNumber, isBlocked,projectID);
   }
 
   userStatus() {
@@ -43,7 +43,7 @@ class AddNewUserState extends ChangeNotifier {
     _service.deleteAllData();
   }
 
-  Stream<List<UserInfo>> get getPhoneNumberStream {
+  Stream<List<UserInfo>>  getPhoneNumberStream(String projectID ) {
     return Service()
         .projects
         .doc(projectID)

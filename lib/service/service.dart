@@ -4,15 +4,19 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dhismoappadmin/models/history_model.dart';
 import 'package:dhismoappadmin/models/jumlo_history_model.dart';
 import 'package:dhismoappadmin/models/product_model.dart';
+import 'package:dhismoappadmin/models/project_names_or_ids.dart';
 import 'package:dhismoappadmin/models/total_products_price_model.dart';
 import 'package:dhismoappadmin/models/users_model.dart';
-import 'package:dhismoappadmin/productsListScreen/product_list_screen_state.dart';
 
 const String PROJECTS = "projects";
 const String PRODUCTS = "products";
 const String USERS = "users";
+//const String projectID = "madiin project";
 
 class Service {
+
+  Service({this.projectID});
+  String? projectID;
   CollectionReference projects =
       FirebaseFirestore.instance.collection(PROJECTS);
   CollectionReference products =
@@ -23,6 +27,22 @@ class Service {
   double totalPriceOfSell = 0;
   String productID = DateTime.now().toString();
 
+// --------------------creating project name or id -----------------
+  createProjectNameOrID(String projectNameOrID) {
+    projects.doc(projectNameOrID).set({'projectNameOrID': projectNameOrID});
+  }
+
+  List<ProjectsNames> getCreatedProjectsIDs(QuerySnapshot snapshot) {
+    return snapshot.docs.map((doc) {
+      return ProjectsNames(projectName: doc['projectNameOrID']);
+    }).toList();
+  }
+
+  deleteProjectName(String projectName) {
+    projects.doc(projectName).delete();
+  }
+
+//-------------------------------------------------------------------------
   addData(
       {double? groupPrice,
       String? productName,
@@ -101,8 +121,8 @@ class Service {
 
   //update the total
   updateTotalSold(double totalOfPurchased) {
-    products
-        .doc('totalData')
+    projects
+        .doc(projectID)
         .collection("totalOfProducts")
         .doc('totalData')
         .update({
@@ -188,7 +208,7 @@ class Service {
   }
 
 //---------------- adding new user ----------------------
-  addNewUser(String phoneNumber, bool isBlocked) async {
+  addNewUser(String phoneNumber, bool isBlocked,String projectID) async {
     await projects
         .doc(projectID)
         .collection('users')

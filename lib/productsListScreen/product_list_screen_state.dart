@@ -1,15 +1,21 @@
+import 'package:dhismoappadmin/add_new_project/add_new_project_state.dart';
 import 'package:dhismoappadmin/models/product_model.dart';
 import 'package:dhismoappadmin/models/total_products_price_model.dart';
 import 'package:dhismoappadmin/service/service.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-const String projectID = "madiindoID";
 
-final productListProvider = ChangeNotifierProvider((ref) => ProductListState());
+final productListProvider = ChangeNotifierProvider<ProductListState>((ref){
+  final currentProjectName = ref.watch(addNewProjectProvider).currentProjectName;
+
+  return ProductListState(projectID: currentProjectName);
+});
 
 //--
 class ProductListState extends ChangeNotifier {
+  ProductListState({this.projectID});
+  String? projectID;
   List<ProductModel> _productList = [];
 
   List<ProductModel> get productList => _productList;
@@ -20,7 +26,7 @@ class ProductListState extends ChangeNotifier {
       required double? pricePerItemPurchased,
       required double? pricePerItemToSell,
       required int? quantity}) {
-    Service().addData(
+    Service(projectID:projectID ).addData(
         groupPrice: groupPrice,
         productName: productName,
         pricePerItemPurchased: pricePerItemPurchased,
@@ -44,7 +50,7 @@ class ProductListState extends ChangeNotifier {
         quantityLeft: quantityLeft);
   }
 
-  Stream<List<ProductModel>> get getProductStream {
+  Stream<List<ProductModel>>  getProductStream(String projectID) {
     return Service()
         .projects
         .doc(projectID)
@@ -53,7 +59,7 @@ class ProductListState extends ChangeNotifier {
         .map(Service().getProductSnapshot);
   }
 
-  Stream<TotalProductsPriceModel> get totalSoldStream {
+  Stream<TotalProductsPriceModel> totalSoldStream(String projectID) {
     return Service()
         .projects
         .doc(projectID)

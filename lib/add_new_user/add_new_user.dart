@@ -1,4 +1,4 @@
-
+import 'package:dhismoappadmin/add_new_project/add_new_project_state.dart';
 import 'package:dhismoappadmin/models/users_model.dart';
 import 'package:dhismoappadmin/widgets/user_bottom_nav.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +12,8 @@ class AddNewUser extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
     final newUserProvider = watch(addingNewUserProvider);
+    final projectIDProvider = watch(addNewProjectProvider);
+    String? currentProjectName = projectIDProvider.currentProjectName;
     newUserProvider.userStatus();
     bool isBlocked = newUserProvider.isBlocked;
 
@@ -36,9 +38,10 @@ class AddNewUser extends ConsumerWidget {
               onPressed: () async {
                 if (_newPhoneNumberController.text.length >= 6 &&
                     _newPhoneNumberController.text.length <= 6) {
-                  await context
-                      .read(addingNewUserProvider)
-                      .addNewUser(_newPhoneNumberController.text, false);
+                  await context.read(addingNewUserProvider).addNewUser(
+                      _newPhoneNumberController.text,
+                      false,
+                      currentProjectName!);
                   _newPhoneNumberController.clear();
                   FocusScope.of(context).unfocus();
                 } else {
@@ -55,7 +58,8 @@ class AddNewUser extends ConsumerWidget {
               child: Text("Create")),
           Expanded(
             child: StreamBuilder<List<UserInfo>>(
-                stream: newUserProvider.getPhoneNumberStream,
+                stream:
+                    newUserProvider.getPhoneNumberStream(currentProjectName!),
                 builder: (BuildContext context, snapshot) {
                   if (snapshot.hasData) {
                     var userInfoList = snapshot.data;
