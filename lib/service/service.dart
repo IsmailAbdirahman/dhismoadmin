@@ -247,10 +247,12 @@ class Service {
     }).toList();
   }
 
-  Stream<List<HistoryModel>> getHistoryStream(String userID) {
-    return users
-        .doc(userID)
-        .collection("History")
+  Stream<List<HistoryModel>> getHistoryStream(String userID,String projectID) {
+    print(":::::::::::::::::: userID:   $userID");
+    print(":::::::::::::::::: projectID:   $projectID");
+    return projects
+        .doc(projectID)
+        .collection("users").doc(userID).collection('History')
         .snapshots()
         .map(getHistorySnapshot);
   }

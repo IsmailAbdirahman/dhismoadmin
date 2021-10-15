@@ -1,3 +1,4 @@
+import 'package:dhismoappadmin/add_new_project/add_new_project_state.dart';
 import 'package:dhismoappadmin/models/history_model.dart';
 import 'package:dhismoappadmin/models/users_model.dart';
 import 'package:dhismoappadmin/productsListScreen/product_list_screen_state.dart';
@@ -7,14 +8,20 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final addingNewUserProvider =
-    ChangeNotifierProvider((ref) => AddNewUserState());
+final addingNewUserProvider = ChangeNotifierProvider<AddNewUserState>((ref) {
+  final currentProjectName =
+      ref.watch(addNewProjectProvider).currentProjectName;
+  return AddNewUserState(projectID: currentProjectName);
+});
 
 //--
 class AddNewUserState extends ChangeNotifier {
+  AddNewUserState({this.projectID});
+
   Service _service = Service();
   bool _isBlocked = false;
   String? _userID;
+  String? projectID;
 
   String? get userID => _userID;
 
@@ -26,7 +33,7 @@ class AddNewUserState extends ChangeNotifier {
   }
 
   addNewUser(String phoneNumber, bool isBlocked, String projectID) async {
-    return await _service.addNewUser(phoneNumber, isBlocked,projectID);
+    return await _service.addNewUser(phoneNumber, isBlocked, projectID);
   }
 
   userStatus() {
@@ -43,7 +50,7 @@ class AddNewUserState extends ChangeNotifier {
     _service.deleteAllData();
   }
 
-  Stream<List<UserInfo>>  getPhoneNumberStream(String projectID ) {
+  Stream<List<UserInfo>> getPhoneNumberStream(String projectID) {
     return Service()
         .projects
         .doc(projectID)
@@ -53,6 +60,6 @@ class AddNewUserState extends ChangeNotifier {
   }
 
   Stream<List<HistoryModel>> getHistoryStreamm(String userID) {
-    return _service.getHistoryStream(userID);
+    return _service.getHistoryStream(userID,projectID!);
   }
 }
