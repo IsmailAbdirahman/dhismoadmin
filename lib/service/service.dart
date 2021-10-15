@@ -14,8 +14,8 @@ const String USERS = "users";
 //const String projectID = "madiin project";
 
 class Service {
-
   Service({this.projectID});
+
   String? projectID;
   CollectionReference projects =
       FirebaseFirestore.instance.collection(PROJECTS);
@@ -43,11 +43,7 @@ class Service {
   }
 
 //-------------------------------------------------------------------------
-  addData(
-      {
-      String? productName,
-      double? pricePerItemPurchased,
-      int? quantity}) {
+  addData({String? productName, double? pricePerItemPurchased, int? quantity}) {
     projects.doc(projectID).collection("products").doc(productID).set({
       'productID': productID,
       'productName': productName,
@@ -96,8 +92,7 @@ class Service {
     });
   }
 
-  getTotal(
-      double pricePerItemPurchased, int quantity) {
+  getTotal(double pricePerItemPurchased, int quantity) {
     double totalPriceOfSingleProduct = pricePerItemPurchased * quantity;
     projects
         .doc(projectID)
@@ -203,7 +198,7 @@ class Service {
   }
 
 //---------------- adding new user ----------------------
-  addNewUser(String phoneNumber, bool isBlocked,String projectID) async {
+  addNewUser(String phoneNumber, bool isBlocked, String projectID) async {
     await projects
         .doc(projectID)
         .collection('users')
@@ -225,8 +220,8 @@ class Service {
   }
 
   blockUnblockUser(String phoneNumber, bool isBlocked) async {
-    await users.doc(phoneNumber).update({"isBlocked": isBlocked}).then(
-        (value) => print("user Status Updated"));
+    await projects.doc(projectID).collection('users').doc(phoneNumber).update(
+        {"isBlocked": isBlocked}).then((value) => print("user Status Updated"));
   }
 
   //Get specific User History
@@ -242,12 +237,14 @@ class Service {
     }).toList();
   }
 
-  Stream<List<HistoryModel>> getHistoryStream(String userID,String projectID) {
+  Stream<List<HistoryModel>> getHistoryStream(String userID, String projectID) {
     print(":::::::::::::::::: userID:   $userID");
     print(":::::::::::::::::: projectID:   $projectID");
     return projects
         .doc(projectID)
-        .collection("users").doc(userID).collection('History')
+        .collection("users")
+        .doc(userID)
+        .collection('History')
         .snapshots()
         .map(getHistorySnapshot);
   }

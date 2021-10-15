@@ -23,8 +23,8 @@ class MyApp extends StatelessWidget {
   }
 }
 
-///TODO:1- Test the user app if it can login different id with different projects
-///TODO:2- Find new way to save the new projects
-///TODO:3- First page of admin app and user app show list of projects saved
-///TODO:4- Delete the features that not needed in the project
-///TODO:5- Change the color of both apps
+///TODO:1- Change Titles
+///TODO:2- Change color
+///TODO:3- Test full apps
+///TODO:4- Show the apps to bukhaari
+///TODO:5- Start building the last feature

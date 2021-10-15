@@ -42,7 +42,7 @@ class AddNewUserState extends ChangeNotifier {
   }
 
   blockUnblockUser(String phoneNumber, bool isBlocked) async {
-    _service.blockUnblockUser(phoneNumber, isBlocked);
+    Service(projectID: projectID).blockUnblockUser(phoneNumber, isBlocked);
     notifyListeners();
   }
 
