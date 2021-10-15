@@ -5,9 +5,9 @@ import 'package:dhismoappadmin/service/service.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-
-final productListProvider = ChangeNotifierProvider<ProductListState>((ref){
-  final currentProjectName = ref.watch(addNewProjectProvider).currentProjectName;
+final productListProvider = ChangeNotifierProvider<ProductListState>((ref) {
+  final currentProjectName =
+      ref.watch(addNewProjectProvider).currentProjectName;
 
   return ProductListState(projectID: currentProjectName);
 });
@@ -15,22 +15,19 @@ final productListProvider = ChangeNotifierProvider<ProductListState>((ref){
 //--
 class ProductListState extends ChangeNotifier {
   ProductListState({this.projectID});
+
   String? projectID;
   List<ProductModel> _productList = [];
 
   List<ProductModel> get productList => _productList;
 
   addData(
-      {required double? groupPrice,
-      required String? productName,
+      {required String? productName,
       required double? pricePerItemPurchased,
-      required double? pricePerItemToSell,
       required int? quantity}) {
-    Service(projectID:projectID ).addData(
-        groupPrice: groupPrice,
+    Service(projectID: projectID).addData(
         productName: productName,
         pricePerItemPurchased: pricePerItemPurchased,
-        pricePerItemToSell: pricePerItemToSell,
         quantity: quantity);
   }
 
@@ -50,7 +47,7 @@ class ProductListState extends ChangeNotifier {
         quantityLeft: quantityLeft);
   }
 
-  Stream<List<ProductModel>>  getProductStream(String projectID) {
+  Stream<List<ProductModel>> getProductStream(String projectID) {
     return Service()
         .projects
         .doc(projectID)

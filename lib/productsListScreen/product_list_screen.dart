@@ -230,20 +230,19 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
                                         actions: [
                                           ElevatedButton(
                                               onPressed: () {
-                                                context
-                                                    .read(productListProvider)
-                                                    .deleteProduct(
-                                                        prodID: data[index]
-                                                            .productID!,
-                                                        pricePurchase: data[
-                                                                index]
-                                                            .pricePerItemPurchased!,
-                                                        priceSold: data[index]
-                                                            .pricePerItemToSell!,
-                                                        quantityLeft:
-                                                            data[index]
-                                                                .quantity!);
-                                                Navigator.pop(context);
+                                                // context
+                                                //     .read(productListProvider)
+                                                //     .deleteProduct(
+                                                //         prodID: data[index]
+                                                //             .productID!,
+                                                //         pricePurchase: data[
+                                                //                 index]
+                                                //             .pricePerItemPurchased!,
+                                                //
+                                                //         quantityLeft:
+                                                //             data[index]
+                                                //                 .quantity!);
+                                                // Navigator.pop(context);
                                               },
                                               child: Text("Haa")),
                                           ElevatedButton(
@@ -345,20 +344,6 @@ class ProductTile extends StatelessWidget {
                 desc: "Inta Xabo ka taalo: ",
                 text: productModel!.quantity.toString(),
                 color: productModel!.quantity! > 16 ? Colors.white : Colors.red,
-              ),
-              Divider(
-                color: Colors.white,
-              ),
-              CardInfo(
-                desc: "Halki Xabo Qiimahiisa: ",
-                text: "\$${productModel!.pricePerItemToSell}",
-              ),
-              Divider(
-                color: Colors.white,
-              ),
-              CardInfo(
-                desc: "Qiimaha jumlada: ",
-                text: "\$${productModel!.priceGroupItems}",
               ),
               Divider(
                 color: Colors.white,

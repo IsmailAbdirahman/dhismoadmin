@@ -44,20 +44,17 @@ class Service {
 
 //-------------------------------------------------------------------------
   addData(
-      {double? groupPrice,
+      {
       String? productName,
       double? pricePerItemPurchased,
-      double? pricePerItemToSell,
       int? quantity}) {
     projects.doc(projectID).collection("products").doc(productID).set({
-      'groupPrice': groupPrice,
       'productID': productID,
       'productName': productName,
       'pricePerItemPurchased': pricePerItemPurchased,
-      'pricePerItemToSell': pricePerItemToSell,
       'quantity': quantity
     }).then((_) {
-      getTotal(pricePerItemPurchased!, pricePerItemToSell!, quantity!);
+      getTotal(pricePerItemPurchased!, quantity!);
     });
   }
 
@@ -100,7 +97,7 @@ class Service {
   }
 
   getTotal(
-      double pricePerItemPurchased, double pricePerItemToSell, int quantity) {
+      double pricePerItemPurchased, int quantity) {
     double totalPriceOfSingleProduct = pricePerItemPurchased * quantity;
     projects
         .doc(projectID)
@@ -141,11 +138,9 @@ class Service {
   List<ProductModel> getProductSnapshot(QuerySnapshot snapshot) {
     return snapshot.docs.map((doc) {
       return ProductModel(
-          priceGroupItems: doc['groupPrice'],
           productID: doc['productID'],
           productName: doc['productName'],
           pricePerItemPurchased: doc['pricePerItemPurchased'],
-          pricePerItemToSell: doc['pricePerItemToSell'],
           quantity: doc['quantity']);
     }).toList();
   }

@@ -1,4 +1,3 @@
-
 import 'package:dhismoappadmin/widgets/bottom_navigation_widget.dart';
 import 'package:dhismoappadmin/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
@@ -16,15 +15,12 @@ class _AddNewProductsState extends State<AddNewProducts> {
   TextEditingController _productNameController = TextEditingController();
   TextEditingController _pricePerItemPurchasedController =
       TextEditingController();
-  TextEditingController _pricePerItemToSellController = TextEditingController();
   TextEditingController _quantityController = TextEditingController();
-  TextEditingController _groupPriceController = TextEditingController();
 
   @override
   void dispose() {
     _productNameController.dispose();
     _pricePerItemPurchasedController.dispose();
-    _pricePerItemToSellController.dispose();
     _quantityController.dispose();
     super.dispose();
   }
@@ -52,20 +48,8 @@ class _AddNewProductsState extends State<AddNewProducts> {
                 hintName: 'Imisa ayaad kusoo iibisay Halkii Xabo ?',
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: CustomTextField(
-                controller: _pricePerItemToSellController,
-                hintName: 'Imisa ayaad doneysaa in aad ku iibiso HALKII Xabo ?',
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: CustomTextField(
-                controller: _groupPriceController,
-                hintName: 'Imisa ayaad doneysaa in aad ku iibiso JUMLO ahaan ?',
-              ),
-            ),
+
+
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: CustomTextField(
@@ -76,17 +60,15 @@ class _AddNewProductsState extends State<AddNewProducts> {
             ElevatedButton(
                 onPressed: () async {
                   if (_pricePerItemPurchasedController.text.isNotEmpty &&
-                      _pricePerItemToSellController.text.isNotEmpty &&
+
                       _quantityController.text.isNotEmpty &&
-                      _productNameController.text.isNotEmpty &&
-                      _groupPriceController.text.isNotEmpty) {
+                      _productNameController.text.isNotEmpty
+                      ) {
                     double pricePurchased =
                         double.parse(_pricePerItemPurchasedController.text);
-                    double priceToSell =
-                        double.parse(_pricePerItemToSellController.text);
+
                     int quantity = int.parse(_quantityController.text);
-                    double groupPrice =
-                        double.parse(_groupPriceController.text);
+
 
                     showDialog<void>(
                       context: context,
@@ -103,11 +85,9 @@ class _AddNewProductsState extends State<AddNewProducts> {
                                   await context
                                       .read(productListProvider)
                                       .addData(
-                                          groupPrice: groupPrice,
                                           productName:
                                               _productNameController.text,
                                           pricePerItemPurchased: pricePurchased,
-                                          pricePerItemToSell: priceToSell,
                                           quantity: quantity);
                                   Fluttertoast.showToast(
                                           msg: "wala fuliyay dalabkaga",
