@@ -59,19 +59,31 @@ class AddNewProject extends ConsumerWidget {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) =>
-                                            DisplayData()));
+                                        builder: (context) => DisplayData()));
                               },
-                              title: Text(projectNameList[index].projectName!),
-                              subtitle: Divider(),
-                              trailing: InkWell(
-                                onTap: () {
-                                  newUserProvider.deleteProjectName(
-                                      projectNameList[index].projectName!);
-                                },
-                                child: Icon(
-                                  Icons.delete_forever_outlined,
-                                ),
+                              title: Container(
+                                height: 50,
+                                child: Card(
+                                  elevation: 4,
+                                    child: Row(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.only(left: 8),
+                                          child: Icon(Icons.construction),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.only(right: 18.0),
+                                          child: Icon(Icons.villa_outlined),
+                                        ),
+
+                                        Text(
+                                          projectNameList[index].projectName!,
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 16),
+                                        ),
+                                      ],
+                                    )),
                               ),
                             ),
                           );

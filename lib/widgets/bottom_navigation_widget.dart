@@ -35,7 +35,7 @@ class homeState extends State<DisplayData> {
 
   Widget getBottomNavigationBar() {
     return BottomNavigationBar(
-      backgroundColor: Colors.deepPurple,
+      backgroundColor: Colors.deepOrange,
       elevation: 0,
       unselectedItemColor: Colors.white70,
       items: const <BottomNavigationBarItem>[

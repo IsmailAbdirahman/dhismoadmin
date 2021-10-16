@@ -37,7 +37,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                 appBar: AppBar(
                   centerTitle: true,
                   automaticallyImplyLeading: false,
-                  title: Text("Tafaariiq"),
+                  title: Text("History of ${historyStateWatch.userID}"),
                   actions: [
                     SearchBarHistoryWidget(
                       searchHistoryID: dataSnapshot,
@@ -78,7 +78,7 @@ class HistoryTile extends StatelessWidget {
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         elevation: 10,
-        color: Colors.deepPurple[700],
+        color: Colors.deepOrange[900],
         child: Padding(
           padding: const EdgeInsets.all(18.0),
           child: Column(

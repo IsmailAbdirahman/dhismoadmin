@@ -1,6 +1,6 @@
 import 'package:dhismoappadmin/add_new_project/add_new_project_state.dart';
+import 'package:dhismoappadmin/history/history_screen.dart';
 import 'package:dhismoappadmin/models/users_model.dart';
-import 'package:dhismoappadmin/widgets/user_bottom_nav.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -76,7 +76,7 @@ class AddNewUser extends ConsumerWidget {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            DisplayUserData()));
+                                            HistoryScreen()));
                               },
                               title: Text(userInfoList[index].phoneNumber!),
                               subtitle: Divider(),
