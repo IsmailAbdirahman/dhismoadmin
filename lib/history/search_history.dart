@@ -36,8 +36,8 @@ class SearchHistory extends SearchDelegate {
   ThemeData appBarTheme(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     return theme.copyWith(
-      primaryColor: Colors.deepPurple,
-      backgroundColor: Colors.deepPurple,
+      primaryColor: Colors.deepOrange,
+      backgroundColor: Colors.deepOrange,
     );
   }
 
