@@ -1,6 +1,6 @@
-
 import 'package:dhismoappadmin/add_new_project/add_new_project.dart';
 import 'package:dhismoappadmin/add_new_user/add_new_user.dart';
+import 'package:dhismoappadmin/daily_payments/daily_payments.dart';
 import 'package:dhismoappadmin/productsListScreen/product_list_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +16,11 @@ class DisplayData extends StatefulWidget {
 
 class homeState extends State<DisplayData> {
   int _selectedIndex = 0;
-  List<Widget> _widgetOptions = <Widget>[ProductsListScreen(), AddNewUser()];
+  List<Widget> _widgetOptions = <Widget>[
+    ProductsListScreen(),
+    AddNewUser(),
+    DailyPayments()
+  ];
 
   void _onItemTapped(int index) {
     setState(() {
@@ -41,6 +45,7 @@ class homeState extends State<DisplayData> {
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
         BottomNavigationBarItem(icon: Icon(Icons.person), label: "Users"),
+        BottomNavigationBarItem(icon: Icon(Icons.payments_outlined), label: "Daily Payments"),
       ],
       currentIndex: _selectedIndex,
       selectedItemColor: Colors.white,

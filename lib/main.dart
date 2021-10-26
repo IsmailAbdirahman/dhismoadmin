@@ -23,8 +23,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
-///TODO:1- Change Titles
-///TODO:2- Change color
+///TODO:1- Add Delete an item from daily Payment List
+///TODO:2- Remove extra Zeros
 ///TODO:3- Test full apps
 ///TODO:4- Show the apps to bukhaari
-///TODO:5- Start building the last feature

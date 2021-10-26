@@ -1,12 +1,14 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dhismoappadmin/models/daily_payments_model.dart';
 import 'package:dhismoappadmin/models/history_model.dart';
 import 'package:dhismoappadmin/models/jumlo_history_model.dart';
 import 'package:dhismoappadmin/models/product_model.dart';
 import 'package:dhismoappadmin/models/project_names_or_ids.dart';
 import 'package:dhismoappadmin/models/total_products_price_model.dart';
 import 'package:dhismoappadmin/models/users_model.dart';
+import 'package:flutter/material.dart';
 
 const String PROJECTS = "projects";
 const String PRODUCTS = "products";
@@ -43,6 +45,41 @@ class Service {
   }
 
 //-------------------------------------------------------------------------
+
+  //---------------- Save and get Daily Payments Information---------------
+
+  saveTodayPayment(String name, double amount) {
+    var now = DateTime.now();
+    String paymentID = DateUtils.dateOnly(now).toString();
+    String date = DateUtils.dateOnly(now).toString();
+    projects
+        .doc(projectID)
+        .collection("dailyPayments")
+        .doc(paymentID)
+        .set({"name": name, "amount": amount, "date": date});
+  }
+
+  deletePayment(String id) {
+    projects.doc(projectID).collection("dailyPayments").doc(id).delete();
+  }
+
+  List<DailyPaymentsModel> getDaysOfPayment(QuerySnapshot snapshot) {
+    return snapshot.docs.map((doc) {
+      return DailyPaymentsModel(
+          name: doc['name'], date: doc['date'], amount: doc['amount']);
+    }).toList();
+  }
+
+  Stream<List<DailyPaymentsModel>> getDailyPaymentStream() {
+    return projects
+        .doc(projectID)
+        .collection('dailyPayments')
+        .orderBy("date", descending: true)
+        .snapshots()
+        .map(getDaysOfPayment);
+  }
+
+  //-------------------------------------------------------------------------
   addData({String? productName, double? pricePerItemPurchased, int? quantity}) {
     projects.doc(projectID).collection("products").doc(productID).set({
       'productID': productID,
