@@ -50,13 +50,10 @@ class Service {
 
   saveTodayPayment(String name, double amount) {
     var now = DateTime.now();
-    String paymentID = DateUtils.dateOnly(now).toString();
-    String date = DateUtils.dateOnly(now).toString();
-    projects
-        .doc(projectID)
-        .collection("dailyPayments")
-        .doc(paymentID)
-        .set({"name": name, "amount": amount, "date": date});
+    String paymentID = now.toString();
+    DateTime date = DateTime(now.year, now.month, now.day);
+    projects.doc(projectID).collection("dailyPayments").doc(paymentID).set(
+        {"paymentID": paymentID, "name": name, "amount": amount, "date": date});
   }
 
   deletePayment(String id) {
@@ -66,7 +63,10 @@ class Service {
   List<DailyPaymentsModel> getDaysOfPayment(QuerySnapshot snapshot) {
     return snapshot.docs.map((doc) {
       return DailyPaymentsModel(
-          name: doc['name'], date: doc['date'], amount: doc['amount']);
+          paymentID: doc['paymentID'],
+          name: doc['name'],
+          date: doc['date'],
+          amount: doc['amount']);
     }).toList();
   }
 
@@ -94,21 +94,17 @@ class Service {
   deleteProduct(
       {required String prodID,
       required double pricePurchase,
-      required double priceSold,
       required int quantityLeft}) {
-    deleteAndUpdateTotal(pricePurchase, priceSold, quantityLeft).then((_) {
-      products.doc(prodID).delete();
+    deleteAndUpdateTotal(pricePurchase, quantityLeft).then((_) {
+      projects.doc(projectID).collection('products').doc(prodID).delete();
+
     });
   }
 
-  Future deleteAndUpdateTotal(double pricePerItemPurchased,
-      double pricePerItemToSell, int quantity) async {
+  Future deleteAndUpdateTotal(
+      double pricePerItemPurchased, int quantity) async {
     double totalPriceOfSingleProduct = pricePerItemPurchased * quantity;
-    await products
-        .doc('totalData')
-        .collection('totalOfProducts')
-        .doc('totalData')
-        .get()
+    await projects.doc(projectID).collection('totalOfProducts').doc('totalData').get()
         .then((DocumentSnapshot snapshot) {
       if (snapshot.exists) {
         totalPricePurchased = snapshot.get('totalPricePurchased');
@@ -118,6 +114,9 @@ class Service {
       }
     });
   }
+
+
+
 
   //save the total
   saveTotal(double totalOfPurchased) {

@@ -38,12 +38,11 @@ class ProductListState extends ChangeNotifier {
   deleteProduct(
       {required String prodID,
       required double pricePurchase,
-      required double priceSold,
+
       required int quantityLeft}) {
-    Service().deleteProduct(
+    Service(projectID: projectID).deleteProduct(
         prodID: prodID,
         pricePurchase: pricePurchase,
-        priceSold: priceSold,
         quantityLeft: quantityLeft);
   }
 

@@ -230,19 +230,21 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
                                         actions: [
                                           ElevatedButton(
                                               onPressed: () {
-                                                // context
-                                                //     .read(productListProvider)
-                                                //     .deleteProduct(
-                                                //         prodID: data[index]
-                                                //             .productID!,
-                                                //         pricePurchase: data[
-                                                //                 index]
-                                                //             .pricePerItemPurchased!,
-                                                //
-                                                //         quantityLeft:
-                                                //             data[index]
-                                                //                 .quantity!);
-                                                // Navigator.pop(context);
+                                                print("IDIDIDIDID ${data[index]
+                                                    .productID!}");
+                                                context
+                                                    .read(productListProvider)
+                                                    .deleteProduct(
+                                                        prodID: data[index]
+                                                            .productID!,
+                                                        pricePurchase: data[
+                                                                index]
+                                                            .pricePerItemPurchased!,
+
+                                                        quantityLeft:
+                                                            data[index]
+                                                                .quantity!);
+                                                Navigator.pop(context);
                                               },
                                               child: Text("Haa")),
                                           ElevatedButton(

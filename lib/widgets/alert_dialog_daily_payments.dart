@@ -11,7 +11,7 @@ showDailyPaymentDialog(
   TextEditingController amountController = TextEditingController();
   return showDialog(
       context: context,
-      barrierDismissible: true,
+      barrierDismissible: false,
       builder: (BuildContext context) {
         return BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
@@ -44,6 +44,7 @@ showDailyPaymentDialog(
                     Padding(
                       padding: const EdgeInsets.all(18.0),
                       child: TextField(
+                        keyboardType: TextInputType.number,
                         controller: amountController,
                         decoration: InputDecoration(hintText: "amount:"),
                       ),
@@ -60,7 +61,7 @@ showDailyPaymentDialog(
                                 shape: RoundedRectangleBorder(
                                   borderRadius: new BorderRadius.circular(30.0),
                                 ),
-                                primary: Colors.red[800]),
+                                primary: Colors.deepOrange),
                             child: Text(
                               "Add",
                               style: TextStyle(color: Colors.white),

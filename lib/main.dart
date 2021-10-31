@@ -6,6 +6,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'add_new_project/add_new_project.dart';
 
 void main() async {
+  var now = DateTime.now();
+  DateTime date = DateTime(now.year, now.month , now.day);
+  print("CURRENT DATE IS::::::::::::::::::: $date");
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(ProviderScope(child: MyApp()));

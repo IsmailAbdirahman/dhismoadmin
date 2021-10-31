@@ -1,8 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class DailyPaymentsModel {
+  String? paymentID;
   String? name;
-  String? date;
+  Timestamp? date;
   double? amount;
 
-  DailyPaymentsModel({this.name, this.date, this.amount});
+  DailyPaymentsModel({this.paymentID, this.name, this.date, this.amount});
 }
-
