@@ -26,7 +26,6 @@ class MyApp extends StatelessWidget {
   }
 }
 
-///TODO:1- Add Delete an item from daily Payment List
-///TODO:2- Remove extra Zeros
-///TODO:3- Test full apps
+///TODO:1- Add delete a single product from product list data
+///TODO:2- Test full apps
 ///TODO:4- Show the apps to bukhaari

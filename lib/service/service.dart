@@ -97,14 +97,20 @@ class Service {
       required int quantityLeft}) {
     deleteAndUpdateTotal(pricePurchase, quantityLeft).then((_) {
       projects.doc(projectID).collection('products').doc(prodID).delete();
-
     });
   }
 
   Future deleteAndUpdateTotal(
       double pricePerItemPurchased, int quantity) async {
+    print("PRICE PER ITEM PURCHASED :::::: $pricePerItemPurchased");
+    print("quantity :::::: $quantity");
+
     double totalPriceOfSingleProduct = pricePerItemPurchased * quantity;
-    await projects.doc(projectID).collection('totalOfProducts').doc('totalData').get()
+    await projects
+        .doc(projectID)
+        .collection('totalOfProducts')
+        .doc('totalData')
+        .get()
         .then((DocumentSnapshot snapshot) {
       if (snapshot.exists) {
         totalPricePurchased = snapshot.get('totalPricePurchased');
@@ -114,9 +120,6 @@ class Service {
       }
     });
   }
-
-
-
 
   //save the total
   saveTotal(double totalOfPurchased) {
